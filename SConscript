@@ -71,12 +71,12 @@ libkaffpa_files = [   'lib/data_structure/graph_hierarchy.cpp',
                       'lib/partition/uncoarsening/refinement/kway_graph_refinement/kway_graph_refinement.cpp',
                       'lib/partition/uncoarsening/refinement/kway_graph_refinement/kway_graph_refinement_core.cpp',
                       'lib/partition/uncoarsening/refinement/kway_graph_refinement/kway_graph_refinement_commons.cpp',
-                      'lib/partition/uncoarsening/refinement/cycle_improvements/augmented_Qgraph_fabric.cpp', 
-                      'lib/partition/uncoarsening/refinement/cycle_improvements/advanced_models.cpp', 
-                      'lib/partition/uncoarsening/refinement/kway_graph_refinement/multitry_kway_fm.cpp', 
-                      'lib/partition/uncoarsening/refinement/node_separators/greedy_ns_local_search.cpp', 
-                      'lib/partition/uncoarsening/refinement/node_separators/fm_ns_local_search.cpp', 
-                      'lib/partition/uncoarsening/refinement/node_separators/localized_fm_ns_local_search.cpp', 
+                      'lib/partition/uncoarsening/refinement/cycle_improvements/augmented_Qgraph_fabric.cpp',
+                      'lib/partition/uncoarsening/refinement/cycle_improvements/advanced_models.cpp',
+                      'lib/partition/uncoarsening/refinement/kway_graph_refinement/multitry_kway_fm.cpp',
+                      'lib/partition/uncoarsening/refinement/node_separators/greedy_ns_local_search.cpp',
+                      'lib/partition/uncoarsening/refinement/node_separators/fm_ns_local_search.cpp',
+                      'lib/partition/uncoarsening/refinement/node_separators/localized_fm_ns_local_search.cpp',
                       'lib/algorithms/cycle_search.cpp',
                       'lib/partition/uncoarsening/refinement/cycle_improvements/cycle_refinement.cpp',
                       'lib/partition/uncoarsening/refinement/tabu_search/tabu_search.cpp',
@@ -143,7 +143,7 @@ if env['program'] == 'kaffpaE':
         env.Append(CCFLAGS  = '-DMODE_KAFFPAE')
 
         if SYSTEM == 'Darwin':
-                env['CXX'] = 'openmpicxx'
+                env['CXX'] = 'mpicxx'
         else:
                 env['CXX'] = 'mpicxx'
         env.Program('kaffpaE', ['app/kaffpaE.cpp']+libkaffpa_files+libkaffpa_parallel_async, LIBS=['gomp'])

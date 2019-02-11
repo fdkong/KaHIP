@@ -73,14 +73,14 @@ if SYSTEM != 'Darwin':
                         env.Append(LINKFLAGS = '-openmp')
                         env.Append(CXXFLAGS = '-msse4.2 -openmp -w')
                         env.Append(CCFLAGS = '-msse4.2 -openmp -w')
-                else: 
+                else:
                         env['CXX'] = 'mpicxx'
                         env['CC']  = 'mpicc'
         except KeyError:
                 env['CXX'] = 'mpicxx'
                 env['CC']  = 'mpicc'
 else:
-        env['CXX'] = 'openmpicxx'
+        env['CXX'] = 'mpicxx'
 
 
 if env['program'] == 'toolbox':
@@ -112,20 +112,20 @@ if env['program'] == 'readbgf':
 if env['program'] == 'edge_list_to_metis_graph':
         env.Append(CXXFLAGS = '-DGRAPH_GENERATOR_MPI -DGRAPHGEN_DISTRIBUTED_MEMORY -DKRONECKER_GENERATOR_PROGRAM')
         env.Append(CCFLAGS = '-DGRAPH_GENERATOR_MPI -DGRAPHGEN_DISTRIBUTED_MEMORY -DKRONECKER_GENERATOR_PROGRAM')
-                
+
         env.Program('edge_list_to_metis_graph', ['app/edge_list_to_metis_graph.cpp']+libedgelistfiles, LIBS=['gomp'])
 
 if env['program'] == 'friendster_list_to_metis_graph':
         env.Append(CXXFLAGS = '-DGRAPH_GENERATOR_MPI -DGRAPHGEN_DISTRIBUTED_MEMORY -DKRONECKER_GENERATOR_PROGRAM')
         env.Append(CCFLAGS = '-DGRAPH_GENERATOR_MPI -DGRAPHGEN_DISTRIBUTED_MEMORY -DKRONECKER_GENERATOR_PROGRAM')
-                
+
         env.Program('friendster_list_to_metis_graph', ['app/friendster_list_to_metis_graph.cpp']+libedgelistfiles, LIBS=['gomp'])
 
 
 if env['program'] == 'yahoo_to_metis':
         env.Append(CXXFLAGS = '-DGRAPH_GENERATOR_MPI -DGRAPHGEN_DISTRIBUTED_MEMORY -DKRONECKER_GENERATOR_PROGRAM')
         env.Append(CCFLAGS = '-DGRAPH_GENERATOR_MPI -DGRAPHGEN_DISTRIBUTED_MEMORY -DKRONECKER_GENERATOR_PROGRAM')
-                
+
         env.Program('yahoo_to_metis', ['app/yahoo_to_metis.cpp']+libyahootometis, LIBS=['gomp'])
 
 if env['program'] == 'dspac':

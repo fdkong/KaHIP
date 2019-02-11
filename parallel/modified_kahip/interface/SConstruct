@@ -53,7 +53,7 @@ if SYSTEM == 'Darwin':
 
 # Apply variant specific settings.
 if env['variant'] == 'optimized':
-  env.Append(CXXFLAGS = '-g0 -O3  -DNDEBUG -funroll-loops -fno-stack-limit -static ')
+  env.Append(CXXFLAGS = '-g0 -O3  -DNDEBUG -funroll-loops  -static ')
   env.Append(CCFLAGS = '-g0 -O3  -DNDEBUG')
 elif env['variant'] == 'pdebug':
   # Optimized with debug symbols for profiling.
@@ -61,11 +61,11 @@ elif env['variant'] == 'pdebug':
   env.Append(CCFLAGS = '-g -pg ')
 elif env['variant'] == 'profilingoptimized':
   # Optimized with debug symbols and assertions.
-  env.Append(CXXFLAGS = '-pg -g -O0 -DSPEEDPROFILING -fno-stack-limit -Wall -Winline')
+  env.Append(CXXFLAGS = '-pg -g -O0 -DSPEEDPROFILING  -Wall -Winline')
   env.Append(CCFLAGS = '-pg -g -O0 -DSPEEDPROFILING -Winline')
 else:
   # Debug settings.
-  env.Append(CXXFLAGS = '-g -O0 -Wall -fno-stack-limit -Winline')
+  env.Append(CXXFLAGS = '-g -O0 -Wall  -Winline')
   env.Append(CCFLAGS = '-g -O0 -Winline')
  
 

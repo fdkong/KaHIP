@@ -9,13 +9,13 @@
 #define RANDOM_FUNCTIONS_RMEPKWYT
 
 #include <iostream>
-#include <tr1/random>
+#include <random>
 #include <vector>
 
 #include "definitions.h"
 #include "partition_config.h"
 
-typedef std::tr1::mt19937 MersenneTwister;
+typedef std::mt19937 MersenneTwister;
 
 class random_functions {
         public:
@@ -27,11 +27,11 @@ class random_functions {
                                 if(vec.size() < 2) return;
                                 for( ULONG i = 0; i < vec.size(); i++) {
                                         vec[i] = i;
-                                }                   
+                                }
 
                                 ULONG size = vec.size();
-                                std::tr1::uniform_int<ULONG> A(0,size-1);
-                                std::tr1::uniform_int<ULONG> B(0,size-1);
+                                std::uniform_int_distribution<ULONG> A(0,size-1);
+                                std::uniform_int_distribution<ULONG> B(0,size-1);
 
                                 for( ULONG i = 0; i < size; i++) {
                                         ULONG posA = A(m_mt);
@@ -42,9 +42,9 @@ class random_functions {
                                         }
 
                                         if( posA != vec[posB] && posB != vec[posA]) {
-                                                std::swap(vec[posA], vec[posB]); 
+                                                std::swap(vec[posA], vec[posB]);
                                         }
-                                } 
+                                }
 
                          }
 
@@ -53,22 +53,22 @@ class random_functions {
                                 if(init) {
                                         for( ULONG i = 0; i < vec.size(); i++) {
                                                 vec[i] = i;
-                                        }                   
+                                        }
                                 }
-                                
+
                                 if(vec.size() < 10) return;
-                                        
-                                int distance = 20; 
-                                std::tr1::uniform_int<unsigned int> A(0, distance);
+
+                                int distance = 20;
+                                std::uniform_int_distribution<unsigned int> A(0, distance);
                                 ULONG size = vec.size()-4;
                                 for( ULONG i = 0; i < size; i++) {
                                         ULONG posA = i;
                                         ULONG posB = (posA + A(m_mt))%size;
                                         std::swap(vec[posA], vec[posB]);
-                                        std::swap(vec[posA+1], vec[posB+1]); 
-                                        std::swap(vec[posA+2], vec[posB+2]); 
-                                        std::swap(vec[posA+3], vec[posB+3]); 
-                                }               
+                                        std::swap(vec[posA+1], vec[posB+1]);
+                                        std::swap(vec[posA+2], vec[posB+2]);
+                                        std::swap(vec[posA+3], vec[posB+3]);
+                                }
                         }
 
                 template<typename sometype>
@@ -76,70 +76,70 @@ class random_functions {
                                 if(init) {
                                         for( ULONG i = 0; i < vec.size(); i++) {
                                                 vec[i] = (sometype)i;
-                                        }                   
+                                        }
                                 }
 
-                                if(vec.size() < 10) { 
+                                if(vec.size() < 10) {
                                         permutate_vector_good_small(vec);
                                         return;
                                 }
                                 ULONG size = vec.size();
-                                std::tr1::uniform_int<ULONG> A(0,size - 4);
-                                std::tr1::uniform_int<ULONG> B(0,size - 4);
+                                std::uniform_int_distribution<ULONG> A(0,size - 4);
+                                std::uniform_int_distribution<ULONG> B(0,size - 4);
 
                                 for( ULONG i = 0; i < size; i++) {
                                         ULONG posA = A(m_mt);
                                         ULONG posB = B(m_mt);
-                                        std::swap(vec[posA], vec[posB]); 
-                                        std::swap(vec[posA+1], vec[posB+1]); 
-                                        std::swap(vec[posA+2], vec[posB+2]); 
-                                        std::swap(vec[posA+3], vec[posB+3]); 
+                                        std::swap(vec[posA], vec[posB]);
+                                        std::swap(vec[posA+1], vec[posB+1]);
+                                        std::swap(vec[posA+2], vec[posB+2]);
+                                        std::swap(vec[posA+3], vec[posB+3]);
 
-                                } 
+                                }
                         }
 
                 template<typename sometype>
                         static void permutate_vector_good_small(std::vector<sometype> & vec) {
                                 if(vec.size() < 2) return;
                                 ULONG size = vec.size();
-                                std::tr1::uniform_int<ULONG> A(0,size-1);
-                                std::tr1::uniform_int<ULONG> B(0,size-1);
+                                std::uniform_int_distribution<ULONG> A(0,size-1);
+                                std::uniform_int_distribution<ULONG> B(0,size-1);
 
                                 for( ULONG i = 0; i < size; i++) {
                                         ULONG posA = A(m_mt);
                                         ULONG posB = B(m_mt);
-                                        std::swap(vec[posA], vec[posB]); 
-                                } 
+                                        std::swap(vec[posA], vec[posB]);
+                                }
                         }
 
                 template<typename sometype>
-                        static void permutate_entries(const PPartitionConfig & partition_config, 
-                                                      std::vector<sometype> & vec, 
+                        static void permutate_entries(const PPartitionConfig & partition_config,
+                                                      std::vector<sometype> & vec,
                                                       bool init) {
                                 if(init) {
                                         for( ULONG i = 0; i < vec.size(); i++) {
                                                 vec[i] = i;
-                                        }                   
+                                        }
                                 }
 
                                 switch(partition_config.permutation_quality) {
                                         case PERMUTATION_QUALITY_NONE: break;
                                         case PERMUTATION_QUALITY_FAST: permutate_vector_fast(vec, false); break;
                                         case PERMUTATION_QUALITY_GOOD: permutate_vector_good(vec, false); break;
-                                }      
+                                }
 
                         }
 
                 static bool nextBool() {
-                        std::tr1::uniform_int<short> A(0,1);
-                        return (bool) A(m_mt); 
+                        std::uniform_int_distribution<short> A(0,1);
+                        return (bool) A(m_mt);
                 }
 
                 //including lb and rb
                 template<typename sometype>
                         static sometype nextInt(sometype lb, sometype rb) {
-                                std::tr1::uniform_int<sometype> A(lb,rb);
-                                return A(m_mt); 
+                                std::uniform_int_distribution<sometype> A(lb,rb);
+                                return A(m_mt);
                         }
 
 
@@ -149,7 +149,7 @@ class random_functions {
                         rnbr         *= length;
                         rnbr         += lb;
 
-                        return rnbr; 
+                        return rnbr;
                 }
 
                 static void setSeed(int seed) {

@@ -1,5 +1,5 @@
 /******************************************************************************
- * vertex_moved_hashtable.h 
+ * vertex_moved_hashtable.h
  * *
  * Source of KaHIP -- Karlsruhe High Quality Partitioning.
  * Christian Schulz <christian.schulz.phone@gmail.com>
@@ -13,7 +13,7 @@
 #include "definitions.h"
 #include "limits.h"
 
-using namespace __gnu_cxx;
+/*using namespace __gnu_cxx;*/
 
 struct compare_nodes {
         bool operator()(const NodeID lhs, const NodeID rhs) const {

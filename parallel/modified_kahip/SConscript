@@ -70,9 +70,9 @@ libkaffpa_files = [   'lib/data_structure/graph_hierarchy.cpp',
                       'lib/partition/uncoarsening/refinement/kway_graph_refinement/kway_graph_refinement.cpp',
                       'lib/partition/uncoarsening/refinement/kway_graph_refinement/kway_graph_refinement_core.cpp',
                       'lib/partition/uncoarsening/refinement/kway_graph_refinement/kway_graph_refinement_commons.cpp',
-                      'lib/partition/uncoarsening/refinement/cycle_improvements/augmented_Qgraph_fabric.cpp', 
-                      'lib/partition/uncoarsening/refinement/cycle_improvements/advanced_models.cpp', 
-                      'lib/partition/uncoarsening/refinement/kway_graph_refinement/multitry_kway_fm.cpp', 
+                      'lib/partition/uncoarsening/refinement/cycle_improvements/augmented_Qgraph_fabric.cpp',
+                      'lib/partition/uncoarsening/refinement/cycle_improvements/advanced_models.cpp',
+                      'lib/partition/uncoarsening/refinement/kway_graph_refinement/multitry_kway_fm.cpp',
                       'lib/algorithms/cycle_search.cpp',
                       'lib/partition/uncoarsening/refinement/cycle_improvements/cycle_refinement.cpp',
                       'lib/parallel_mh/galinier_combine/gal_combine.cpp',
@@ -86,7 +86,7 @@ libkaffpa_parallel_async  = ['lib/parallel_mh/parallel_mh_async.cpp',
                              'lib/tools/graph_communication.cpp',
                              'lib/tools/mpi_tools.cpp' ]
 if SYSTEM == 'Darwin':
-        env['CXX'] = 'openmpicxx'
+        env['CXX'] = 'mpicxx'
 else:
         env['CXX'] = 'mpicxx'
 
@@ -99,5 +99,3 @@ if env['program'] == 'library':
         #env.Append(CXXFLAGS = '-DMODE_KAFFPA')
         #env.Append(CCFLAGS  = '-DMODE_KAFFPA')
         #env.Program('interface_test', ['app/interface_test.cpp','interface/kaHIP_interface.cpp']+libkaffpa_files, LIBS=['gomp'])
-
-

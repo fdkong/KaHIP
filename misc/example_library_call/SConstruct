@@ -80,7 +80,7 @@ conf = Configure(env)
 env.Append(CXXFLAGS = '-fopenmp')
 # Apply variant specific settings.
 if env['variant'] == 'optimized':
-  env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops  -fno-stack-limit -O3 -std=c++0x ')
+  env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops   -O3 -std=c++11 ')
   env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops')
 
 # Execute the SConscript.

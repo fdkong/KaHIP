@@ -71,17 +71,17 @@ env.Append(CPPPATH=['../lib/tools'])
 env.Append(CPPPATH=['../lib/partition'])
 env.Append(CPPPATH=['../lib/io'])
 env.Append(CPPPATH=['../lib/partition/uncoarsening/refinement/quotient_graph_refinement/flow_refinement/'])
-env.Append(CPPPATH=['/usr/include/openmpi/'])
+#env.Append(CPPPATH=['/usr/include/openmpi/'])
 
 conf = Configure(env)
 
 if SYSTEM == 'Darwin':
         env.Append(CPPPATH=['/opt/local/include/','../include'])
         env.Append(LIBPATH=['/opt/local/lib/'])
-        env.Append(LIBPATH=['/opt/local/lib/openmpi/'])
+        #env.Append(LIBPATH=['/opt/local/lib/openmpi/'])
         # homebrew related paths
         env.Append(LIBPATH=['/usr/local/lib/'])
-        env.Append(LIBPATH=['/usr/local/lib/openmpi/'])
+        #env.Append(LIBPATH=['/usr/local/lib/openmpi/'])
         #env.Append(LIBPATH=['../extern/argtable3-2.10/maclib'])
         #env.Append(LIBPATH=['./extern/argtable-2.10/maclib'])
 
@@ -93,30 +93,30 @@ if SYSTEM == 'Darwin':
 env.Append(CXXFLAGS = '-fopenmp')
 if "clang" in env['CC'] or "clang" in env['CXX']:
         if env['variant'] == 'optimized':
-          env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops -O3 -std=c++11')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops -std=c++11')
+          env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops -g -std=c++11')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops')
         elif env['variant'] == 'optimized_output':
           # A little bit more output on the console
-          env.Append(CXXFLAGS = ' -DNDEBUG -funroll-loops -Wall -O3 -std=c++11')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -DKAFFPAOUTPUT  -std=c++11')
+          env.Append(CXXFLAGS = ' -DNDEBUG -funroll-loops -Wall -g -std=c++11')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -DKAFFPAOUTPUT')
         else:
-          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops -O3 -std=c++11')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops -std=c++11 ')
+          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops -g -std=c++11')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops')
           if SYSTEM != 'Darwin':
                 env.Append(CXXFLAGS = '-march=native')
                 env.Append(CCFLAGS  = '-march=native')
 
 else:
         if env['variant'] == 'optimized':
-          env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops  -O3 -std=c++11 -fpermissive')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops -std=c++11 -fpermissive')
+          env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops  -g -std=c++11 -fpermissive')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops -fpermissive')
         elif env['variant'] == 'optimized_output':
           # A little bit more output on the console
-          env.Append(CXXFLAGS = ' -DNDEBUG -funroll-loops -Wall  -O3 -std=c++11 -fpermissive')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -DKAFFPAOUTPUT  -std=c++11 -fpermissive')
+          env.Append(CXXFLAGS = ' -DNDEBUG -funroll-loops -Wall  -g -std=c++11 -fpermissive')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -DKAFFPAOUTPUT -fpermissive')
         else:
-          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops  -O3 -std=c++11')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops -std=c++11 ')
+          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops  -g -std=c++11')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops')
           if SYSTEM != 'Darwin':
                 env.Append(CXXFLAGS = '-march=native')
                 env.Append(CCFLAGS  = '-march=native')

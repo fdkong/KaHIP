@@ -102,6 +102,10 @@ libmapping                = ['lib/mapping/local_search_mapping.cpp',
 
 libspac_files = ['lib/spac/spac.cpp']
 
+if True:
+    env['CXX'] = 'mpicxx'
+    env['CC'] = 'mpicc'
+
 if env['program'] == 'kaffpa':
         env.Append(CXXFLAGS = '-DMODE_KAFFPA')
         env.Append(CCFLAGS  = '-DMODE_KAFFPA')

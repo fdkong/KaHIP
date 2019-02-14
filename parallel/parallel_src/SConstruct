@@ -41,7 +41,7 @@ def GetEnvironment():
   if not env['variant'] in ['optimized','optimized_nooutput','debug']:
     print 'Illegal value for variant: %s' % env['variant']
     sys.exit(1)
-  
+
   if not env['program'] in ['parhip','edge_list_to_metis_graph','friendster_list_to_metis_graph','parallel_label_compress_reps','yahoo_to_metis','parmetis_driver','graph2binary','graph2binary_external','readbgf','toolbox','dspac']:
     print 'Illegal value for program: %s' % env['program']
     sys.exit(1)
@@ -68,8 +68,8 @@ env.Append(CPPPATH=['../lib/tools'])
 env.Append(CPPPATH=['../lib/partition'])
 env.Append(CPPPATH=['../lib/io'])
 env.Append(CPPPATH=['../lib/partition/uncoarsening/refinement/quotient_graph_refinement/flow_refinement/'])
-env.Append(LIBPATH=['/home/kit/iti/ma3812/local/opt/argtable-2.10/lib'])
-env.Append(LIBPATH=['/home/c_schulz/local/opt/myopenmpi-1.10.0/lib/'])
+#env.Append(LIBPATH=['/home/kit/iti/ma3812/local/opt/argtable-2.10/lib'])
+#env.Append(LIBPATH=['/home/c_schulz/local/opt/myopenmpi-1.10.0/lib/'])
 
 conf = Configure(env)
 
@@ -78,7 +78,7 @@ if SYSTEM == 'Darwin':
         env.Append(LIBPATH=['/opt/local/lib/'])
         # homebrew related paths
         env.Append(LIBPATH=['/usr/local/lib/'])
-        
+
 
 #if not conf.CheckCXXHeader('mpi.h'):
 	#print "openmpi header not found. Exiting"
@@ -91,36 +91,35 @@ env.Append(CXXFLAGS = '-fopenmp')
 
 if "clang" in env['CC'] or "clang" in env['CXX']:
         if env['variant'] == 'optimized':
-                  env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops  -O3 -std=c++11 -Wall -Wno-literal-suffix -ffast-math -Wno-unused-result')
-                  env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops -ffast-math -Wno-unused-result')
+                  env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops  -g -std=c++11 -Wall -Wno-literal-suffix -ffast-math -Wno-unused-result')
+                  env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops -ffast-math -Wno-unused-result')
         elif env['variant'] == 'optimized_nooutput':
           # A little bit more output on the console
-          env.Append(CXXFLAGS = ' -DNDEBUG -DNOOUTPUT -funroll-loops -Wall -O3 -std=c++11 -ffast-math')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -DNOOUTPUT -DKAFFPAOUTPUT -ffast-math')
+          env.Append(CXXFLAGS = ' -DNDEBUG -DNOOUTPUT -funroll-loops -Wall -g -std=c++11 -ffast-math')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -DNOOUTPUT -DKAFFPAOUTPUT -ffast-math')
         elif env['variant'] == 'debug':
           # A little bit more output on the console
           env.Append(CXXFLAGS = '-Wall -g -pg -std=c++11')
-          env.Append(CCFLAGS  = '-g -pg  -std=c++11')
+          env.Append(CCFLAGS  = '-g -pg')
         else:
-          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops -O3')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops  ')
+          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops -g')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops  ')
 
 else:
         if env['variant'] == 'optimized':
-          env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops   -O3 -std=c++11 -Wall -Wno-literal-suffix -ffast-math -Wno-unused-result -fpermissive')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops -ffast-math -Wno-unused-result -fpermissive')
+          env.Append(CXXFLAGS = '-DNDEBUG -Wall -funroll-loops   -g -std=c++11 -Wall -Wno-literal-suffix -ffast-math -Wno-unused-result -fpermissive')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops -ffast-math -Wno-unused-result -fpermissive')
         elif env['variant'] == 'optimized_nooutput':
           # A little bit more output on the console
-          env.Append(CXXFLAGS = ' -DNDEBUG -DNOOUTPUT -funroll-loops -Wall  -O3 -std=c++11 -ffast-math -fpermissive')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -DNOOUTPUT -DKAFFPAOUTPUT -ffast-math -fpermissive')
+          env.Append(CXXFLAGS = ' -DNDEBUG -DNOOUTPUT -funroll-loops -Wall  -g -std=c++11 -ffast-math -fpermissive')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -DNOOUTPUT -DKAFFPAOUTPUT -ffast-math -fpermissive')
         elif env['variant'] == 'debug':
           # A little bit more output on the console
           env.Append(CXXFLAGS = '-Wall  -g -pg -std=c++11')
-          env.Append(CCFLAGS  = '-g -pg  -std=c++11')
+          env.Append(CCFLAGS  = '-g -pg')
         else:
-          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops   -O3')
-          env.Append(CCFLAGS  = '-O3  -DNDEBUG -funroll-loops  ')
+          env.Append(CXXFLAGS = ' -DNDEBUG -Wall -funroll-loops   -g')
+          env.Append(CCFLAGS  = '-g  -DNDEBUG -funroll-loops  ')
 
 # Execute the SConscript.
 SConscript('SConscript', exports=['env'],variant_dir=env['variant'], duplicate=False)
-

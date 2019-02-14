@@ -68,7 +68,7 @@ SYSTEM = platform.uname()[0]
 if SYSTEM != 'Darwin':
         try:
                 if "supermuc" in os.environ['MYSYSTEMNAME']:
-                        env['CXX'] = 'mpiCC'
+                        env['CXX'] = 'mpicxx'
                         env['CC']  = 'mpicc'
                         env.Append(LINKFLAGS = '-openmp')
                         env.Append(CXXFLAGS = '-msse4.2 -openmp -w')

@@ -71,8 +71,8 @@ env.Append(CPPPATH=['../../../lib/partition/uncoarsening/refinement/quotient_gra
 
 # Apply variant specific settings.
 if env['variant'] == 'optimized':
-  env.Append(CXXFLAGS = '-g0 -O3  -DNDEBUG -funroll-loops -Wextra -Wall -Winline  -static  -Wno-unused-parameter -Wno-inline')
-  env.Append(CCFLAGS = '-g0 -O3  -DNDEBUG')
+  env.Append(CXXFLAGS = '-g0 -g  -DNDEBUG -funroll-loops -Wextra -Wall -Winline  -static  -Wno-unused-parameter -Wno-inline')
+  env.Append(CCFLAGS = '-g0 -g  -DNDEBUG')
 elif env['variant'] == 'pdebug':
   # Optimized with debug symbols for profiling.
   env.Append(CXXFLAGS = '-g -pg  -Wall -Winline')

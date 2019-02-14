@@ -22,9 +22,9 @@
 #* this program.  If not, see <http://www.gnu.org/licenses/>.
 #*****************************************************************************/
 
-echo "==================================================================" 
-echo "run ./compile.sh in main project folder before running this script" 
-echo "==================================================================" 
+echo "=================================================================="
+echo "run ./compile.sh in main project folder before running this script"
+echo "=================================================================="
 
 export JAVA_HOME=/usr/lib/jvm/default-java
 export KAHIP_HOME=../../deploy/
@@ -35,6 +35,6 @@ export LIBDIRS="-L$KAHIP_HOME -L$OPENMPI_HOME/lib "
 set -x
 javac KaHIPWrapper.java KaHIPWrapperResult.java
 javah KaHIPWrapper
-g++ $INCLUDEDIRS $LIBDIRS -fPIC -c KaHIPWrapper.cpp  
+mpicxx $INCLUDEDIRS $LIBDIRS -fPIC -c KaHIPWrapper.cpp  
 mpicxx $INCLUDEDIRS $LIBDIRS -shared -fPIC -o libwrapkahip.so -Wl,-soname,wrapkahip KaHIPWrapper.o -lkahip -lmpi -lmpi_cxx -lgomp
 set +x

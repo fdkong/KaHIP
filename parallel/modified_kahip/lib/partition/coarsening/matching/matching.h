@@ -5,8 +5,8 @@
  * Christian Schulz <christian.schulz.phone@gmail.com>
  *****************************************************************************/
 
-#ifndef MATCHING_QL4RUO3D
-#define MATCHING_QL4RUO3D
+#ifndef MATCHING_QL4RUgD
+#define MATCHING_QL4RUgD
 
 #include "data_structure/graph_access.h"
 #include "partition_config.h"
@@ -26,4 +26,4 @@ class matching {
                 void print_matching(FILE * out, Matching & edge_matching);
 };
 
-#endif /* end of include guard: MATCHING_QL4RUO3D */
+#endif /* end of include guard: MATCHING_QL4RUgD */
